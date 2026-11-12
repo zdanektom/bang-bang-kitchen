@@ -44,8 +44,11 @@ button { cursor: pointer; }
   border-bottom: 1px solid var(--border);
 }
 .brand { display: flex; align-items: center; gap: 10px; min-width: 0; }
-.brand img { border-radius: 8px; flex: none; }
-.brand h1 { font-size: 18px; margin: 0; letter-spacing: -.01em; white-space: nowrap; }
+.brand > div { min-width: 0; }
+.brand-logo { height: 44px; width: auto; max-width: 64px; object-fit: contain; border-radius: 6px; flex: none; display: block; }
+[data-theme="light"] .brand-logo { box-shadow: 0 1px 3px rgba(0,0,0,.25); }
+.brand h1 { font-size: 18px; margin: 0; letter-spacing: -.01em; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+@media (max-width: 360px) { .brand-logo { height: 38px; } .brand h1 { font-size: 16px; } }
 .sub { margin: 0; font-size: 13px; color: var(--muted); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 .icon-btn {
   width: 48px; height: 48px; border-radius: 14px; border: 1px solid var(--border); background: var(--surface);

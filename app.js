@@ -260,7 +260,7 @@ Object.assign(PL, {
 'use strict';
 
 const APP_ID = 'bang-bang-kitchen';
-const APP_VERSION = '1.2.0';
+const APP_VERSION = '1.2.1';
 const STORAGE_KEY = 'bbk:data';
 const SCHEMA_VERSION = 2; // v2 (Nov 2026): adds invoices[] and stockLog[]
 const TZ = 'Europe/London';

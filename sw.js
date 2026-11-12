@@ -1,13 +1,13 @@
 /* Bang Bang Kitchen service worker: offline-first app shell. Bump VERSION on every release. */
-const VERSION = 'bbk-v1.2.0';
+const VERSION = 'bbk-v1.2.1';
 // OCR / PDF libraries (~15 MB) are not precached: they are cached on first scan in a separate,
 // long-lived cache so app updates do not force a re-download. Bump OCR_CACHE only when vendor/ changes.
 const OCR_CACHE = 'bbk-ocr-v1';
 const ASSETS = [
   './', './index.html', './styles.css', './app.js', './manifest.webmanifest',
-  './icons/icon.svg', './icons/icon-192.png', './icons/icon-512.png',
+  './icons/icon-192.png', './icons/icon-512.png',
   './icons/maskable-192.png', './icons/maskable-512.png',
-  './icons/apple-touch-icon.png', './icons/favicon-32.png'
+  './icons/apple-touch-icon.png', './icons/favicon-32.png', './icons/favicon-48.png', './icons/logo-header.png'
 ];
 self.addEventListener('install', (e) => {
   e.waitUntil(caches.open(VERSION).then((c) => c.addAll(ASSETS)).then(() => self.skipWaiting()));
