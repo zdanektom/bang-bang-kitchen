@@ -1,5 +1,5 @@
 /* Bang Bang Kitchen service worker: offline-first app shell. Bump VERSION on every release. */
-const VERSION = 'bbk-v1.2.1';
+const VERSION = 'bbk-v1.2.2';
 // OCR / PDF libraries (~15 MB) are not precached: they are cached on first scan in a separate,
 // long-lived cache so app updates do not force a re-download. Bump OCR_CACHE only when vendor/ changes.
 const OCR_CACHE = 'bbk-ocr-v1';

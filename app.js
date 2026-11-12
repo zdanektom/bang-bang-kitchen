@@ -95,7 +95,8 @@ Object.assign(PL, {
   'Add a production job': 'Dodaj zlecenie produkcji', 'Sauces, pickles, prep for a restaurant': 'Sosy, pikle, przygotowanie dla lokalu',
   'Count stock': 'Policz stan', 'Buns, oil, containers, sauces': 'Bułki, olej, pojemniki, sosy',
   'Log an order or delivery': 'Zapisz zamówienie lub dostawę', 'Bread And Macaroon, Swaledale, Production': 'Bread And Macaroon, Swaledale, produkcja',
-  'Tip: open Settings to add this app to your home screen, change the language, or load clearly-labelled sample data to try it out.': 'Wskazówka: w Ustawieniach dodasz aplikację do ekranu głównego, zmienisz język albo wczytasz wyraźnie oznaczone dane przykładowe.',
+  'Tip: you can also load or remove sample data later in Settings.': 'Wskazówka: dane przykładowe możesz też wczytać albo usunąć później w Ustawieniach.',
+  'Try the app with labelled sample jobs, orders and stock': 'Wypróbuj aplikację na oznaczonych przykładowych zleceniach, zamówieniach i stanach',
   'Headline counts': 'Podsumowanie', 'Open production jobs': 'Otwarte zlecenia produkcji', 'Low-stock items': 'Niski stan',
   'Deliveries due today': 'Dostawy na dziś', 'Late or problem': 'Spóźnione lub z problemem', 'In production': 'W produkcji',
   '{a} ready · {b} in progress': 'gotowe: {a} · w trakcie: {b}', 'Nothing on the go': 'Nic nie jest w trakcie',
@@ -260,7 +261,7 @@ Object.assign(PL, {
 'use strict';
 
 const APP_ID = 'bang-bang-kitchen';
-const APP_VERSION = '1.2.1';
+const APP_VERSION = '1.2.2';
 const STORAGE_KEY = 'bbk:data';
 const SCHEMA_VERSION = 2; // v2 (Nov 2026): adds invoices[] and stockLog[]
 const TZ = 'Europe/London';
@@ -803,11 +804,12 @@ function renderLive() {
       <h2>${esc(t('Nothing to show yet'))}</h2>
       <p>${esc(t('Live fills up as you add production jobs, count stock and log orders. Everything stays on this device.'))}</p>
       <div class="steps">
-        <button class="btn primary" data-act="job-new">${icon('production')}<span>${esc(t('Add a production job'))}<small>${esc(t('Sauces, pickles, prep for a restaurant'))}</small></span></button>
+        <button class="btn primary" data-act="sample-load">${icon('plus')}<span>${esc(t('Load sample data'))}<small>${esc(t('Try the app with labelled sample jobs, orders and stock'))}</small></span></button>
+        <button class="btn" data-act="job-new">${icon('production')}<span>${esc(t('Add a production job'))}<small>${esc(t('Sauces, pickles, prep for a restaurant'))}</small></span></button>
         <button class="btn" data-act="go" data-tab="stock">${icon('stock')}<span>${esc(t('Count stock'))}<small>${esc(t('Buns, oil, containers, sauces'))}</small></span></button>
         <button class="btn" data-act="order-new">${icon('orders')}<span>${esc(t('Log an order or delivery'))}<small>${esc(t('Bread And Macaroon, Swaledale, Production'))}</small></span></button>
       </div></section>
-      <p class="small faint" style="text-align:center">${esc(t('Tip: open Settings to add this app to your home screen, change the language, or load clearly-labelled sample data to try it out.'))}</p>`;
+      <p class="small faint" style="text-align:center">${esc(t('Tip: you can also load or remove sample data later in Settings.'))}</p>`;
   }
   const issues = new Set([...d.late, ...d.problems]).size;
   const stat = (num, lbl, tab, filter, cls = '') => `<button class="stat ${num && cls ? cls : ''}" data-act="stat" data-tab="${tab}" data-filter="${filter}"><span class="num">${num}</span><span class="lbl">${esc(lbl)}</span></button>`;
@@ -2167,6 +2169,11 @@ function renderSettings() {
     <div class="section"><h3>${esc(t('Install on your phone'))}</h3></div>
     <div class="about">${install}</div>
 
+
+    <div class="section"><h3>${esc(t('Sample data'))}</h3></div>
+    <div class="about"><p class="muted small">${esc(t('Load a few clearly-labelled SAMPLE jobs, orders and stock counts to try the app. They are marked “Sample” and can be removed in one tap.'))}</p>
+      ${hasSample ? `<button class="btn block" data-act="sample-clear">${esc(t('Remove sample data'))}</button>` : `<button class="btn block" data-act="sample-load">${esc(t('Load sample data'))}</button>`}</div>
+
     <div class="section"><h3>${esc(t('Locations'))}</h3><button class="btn sm" data-act="loc-edit">${icon('plus')} ${esc(t('Add'))}</button></div>
     <div class="list">${DB.locations.map((l) => listRow(lname(l), [l.fullName ? t(l.fullName) : '', l.hidden ? t('hidden') : ''].filter(Boolean).join(' · '), 'loc-edit', l.id, l.hidden)).join('')}</div>
 
@@ -2186,9 +2193,6 @@ function renderSettings() {
     <input type="file" id="import-file" accept="application/json,.json" hidden>
     <p class="hint" style="margin:8px 2px 0">${esc(t('Data is stored only on this device. Export a backup regularly, and to move to a new phone.'))} ${esc(t('Invoice photos are not included in backups.'))}</p>
 
-    <div class="section"><h3>${esc(t('Sample data'))}</h3></div>
-    <div class="about"><p class="muted small">${esc(t('Load a few clearly-labelled SAMPLE jobs, orders and stock counts to try the app. They are marked “Sample” and can be removed in one tap.'))}</p>
-      ${hasSample ? `<button class="btn block" data-act="sample-clear">${esc(t('Remove sample data'))}</button>` : `<button class="btn block" data-act="sample-load">${esc(t('Load sample data'))}</button>`}</div>
 
     <div class="section"><h3>${esc(t('Danger zone'))}</h3></div>
     <button class="btn danger block" data-act="clear-all">${esc(t('Clear all data'))}</button>
