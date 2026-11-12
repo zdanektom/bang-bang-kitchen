@@ -1,0 +1,56 @@
+<!doctype html>
+<html lang="en-GB" data-theme="dark">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Bang Bang Kitchen</title>
+<meta name="description" content="Kitchen production, stock and deliveries for Bang Bang.">
+<meta name="author" content="Tomasz Zdankowski">
+<meta name="creator" content="Tomasz Zdankowski">
+<meta name="theme-color" content="#0e0f11">
+<meta name="color-scheme" content="dark light">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="Kitchen">
+<meta name="application-name" content="Kitchen">
+<meta name="format-detection" content="telephone=no">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="icon" href="icons/icon.svg" type="image/svg+xml">
+<link rel="icon" href="icons/favicon-32.png" sizes="32x32" type="image/png">
+<link rel="apple-touch-icon" href="icons/apple-touch-icon.png">
+<link rel="stylesheet" href="styles.css">
+<script>
+  // Apply saved theme before first paint to avoid a flash.
+  try { var l = localStorage.getItem('bbk:lang'); if (l === 'pl') document.documentElement.lang = 'pl'; var d = JSON.parse(localStorage.getItem('bbk:data') || '{}'); if (d.settings && d.settings.theme === 'light') document.documentElement.dataset.theme = 'light'; } catch (e) {}
+</script>
+</head>
+<body>
+<a class="skip" href="#view">Skip to content</a>
+<header class="topbar">
+  <div class="brand" aria-label="Bang Bang Kitchen">
+    <img src="icons/icon.svg" alt="" width="30" height="30">
+    <div>
+      <h1 id="title">Bang Bang Kitchen</h1>
+      <p id="subtitle" class="sub"></p>
+    </div>
+  </div>
+  <div class="top-actions">
+    <button class="lang-btn" data-act="lang-toggle" id="lang-btn" type="button">PL</button>
+    <button class="icon-btn" data-act="go" data-tab="settings" aria-label="Settings" id="settings-btn"></button>
+  </div>
+</header>
+<main id="view" tabindex="-1" aria-live="polite"></main>
+<nav class="tabbar" aria-label="Main">
+  <button data-act="go" data-tab="live" class="tab"><span class="ti" data-icon="live"></span><span class="tl" data-label="Live">Live</span></button>
+  <button data-act="go" data-tab="production" class="tab"><span class="ti" data-icon="production"></span><span class="tl" data-label="Production">Production</span></button>
+  <button data-act="go" data-tab="stock" class="tab"><span class="ti" data-icon="stock"></span><span class="tl" data-label="Stock">Stock</span></button>
+  <button data-act="go" data-tab="orders" class="tab"><span class="ti" data-icon="orders"></span><span class="tl" data-label="Orders">Orders</span></button>
+</nav>
+<div id="sheet-root"></div>
+<div id="dialog-root"></div>
+<div id="toast" role="status" aria-live="polite"></div>
+<noscript><p class="noscript">Bang Bang Kitchen needs JavaScript turned on.</p></noscript>
+<script src="app.js"></script>
+</body>
+</html>
